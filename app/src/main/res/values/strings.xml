@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">VirtualCinema</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_movies">Filmy</string>
+    <string name="movie_title">Tytuł filmu</string>
+    <string name="movie_room">Sala</string>
+    <string name="movie_title_label">Tytuł filmu</string>
+    <string name="movie_room_label">Sala</string>
+    <string name="reservation_title">Rezerwuj miejsca</string>
+    <string name="seat_placeholder">A0</string>
+</resources>
