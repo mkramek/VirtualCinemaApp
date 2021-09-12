@@ -13,10 +13,10 @@ interface MoviesService {
     companion object {
         var service: MoviesService? = null
 
-        fun getInstance(): MoviesService {
+        fun getInstance(url: String): MoviesService {
             if (service == null) {
                 val retrofit = Retrofit.Builder()
-                    .baseUrl("http://192.168.1.22:8080/api/v1/")
+                    .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                 service = retrofit.create(MoviesService::class.java)

@@ -2,29 +2,32 @@ package com.cinema.virtualcinema.data.service
 
 import com.cinema.virtualcinema.data.model.Room
 import com.cinema.virtualcinema.data.model.Seat
+import com.cinema.virtualcinema.data.model.SeatStatus
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
-interface SeatsService {
-    @GET("seat")
-    fun getSeats(): Call<List<Seat>>
+interface SeatStatusService {
+    @POST("status/update")
+    fun updateStatus(@Body seat: SeatStatus): Call<SeatStatus>
 
-    @GET("seat/room/{id}")
-    fun getSeatsByRoom(@Path("id") roomId: Long): Call<List<Seat>>
+    @GET("status")
+    fun getAllStatuses(): Call<List<SeatStatus>>
 
     companion object {
-        var service: SeatsService? = null
+        var service: SeatStatusService? = null
 
-        fun getInstance(url: String): SeatsService {
+        fun getInstance(url: String): SeatStatusService {
             if (service == null) {
                 val retrofit = Retrofit.Builder()
                     .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-                service = retrofit.create(SeatsService::class.java)
+                service = retrofit.create(SeatStatusService::class.java)
             }
             return service!!
         }

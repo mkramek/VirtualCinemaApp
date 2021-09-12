@@ -13,7 +13,7 @@ class ReservationActivity : AppCompatActivity() {
         supportActionBar!!.title = getString(R.string.reservation_title)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        setContentView(R.layout.reservation_activity)
+        setContentView(R.layout.activity_reservation)
         if (savedInstanceState == null) {
             val movie: Movie? = intent.getParcelableExtra("movie")
             val bundle: Bundle = Bundle()

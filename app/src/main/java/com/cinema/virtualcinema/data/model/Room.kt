@@ -4,4 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Room(var id: Long, var roomName: String): Parcelable
+data class Room(val id: Long, val roomName: String): Parcelable {
+    override fun toString(): String {
+        return "$roomName ($id)"
+    }
+}

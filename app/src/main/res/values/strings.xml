@@ -11,4 +11,16 @@
     <string name="movie_room_label">Sala</string>
     <string name="reservation_title">Rezerwuj miejsca</string>
     <string name="seat_placeholder">A0</string>
+    <string name="reservation_screen_placeholder">Ekran</string>
+    <string name="seats_room">Sala</string>
+    <string name="ws_server_host">192.168.1.22</string>
+    <string name="cancel">Anuluj</string>
+    <string name="confirm">Potwierdź</string>
+    <string name="reservation_id_label">ID rezerwacji</string>
+    <string name="reservation_room_label">Sala</string>
+    <string name="reservation_seat_label">Miejsce</string>
+    <string name="reservation_seat">Miejsce</string>
+    <string name="reservation_room">Sala</string>
+    <string name="reservation_id">ID rezerwacji</string>
+    <string name="profile_reservations_title">Twoje rezerwacje</string>
 </resources>

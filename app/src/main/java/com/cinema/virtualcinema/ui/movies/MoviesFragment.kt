@@ -18,7 +18,8 @@ class MoviesFragment : Fragment() {
 
     lateinit var viewModel: MoviesViewModel
 
-    private val moviesService = MoviesService.getInstance()
+    private val serviceHost = "http://192.168.1.22:8080/api/v1/"
+    private val moviesService = MoviesService.getInstance(serviceHost)
     val moviesAdapter = MoviesAdapter()
 
     override fun onCreateView(

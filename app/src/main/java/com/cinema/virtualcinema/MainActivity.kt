@@ -1,5 +1,6 @@
 package com.cinema.virtualcinema
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cinema.virtualcinema.databinding.ActivityMainBinding
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +18,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val prefs: SharedPreferences = getSharedPreferences("local_user.preferences", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = prefs.edit()
+        val uuid = prefs.getString("user@uuid", "")
+        if (uuid!!.isEmpty()) {
+            editor.putString("user@uuid", UUID.randomUUID().toString())
+        }
+        editor.apply()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -29,12 +38,5 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    fun switchFragment(id: Int, fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id, fragment, fragment.toString())
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
     }
 }
