@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -123,6 +124,7 @@ class ReservationSeatsFragment : Fragment() {
                             Log.d("API/REQUEST", gson.toJson(call.request()))
                         } else {
                             Log.d("STATUS/NEW", "seat: $it")
+                            activity?.onBackPressed()
                         }
                     }
                     override fun onFailure(call: Call<SeatStatus>, t: Throwable) {
@@ -135,7 +137,15 @@ class ReservationSeatsFragment : Fragment() {
         view.findViewById<Button>(R.id.cancel_seats_btn).setOnClickListener {
             seatsAdapter.getReservedSeats(uuid!!).forEach {
                 val cancelledStatus = SeatStatus(seat = it, status = 0, sender = uuid)
-                statusRepository.updateStatus(cancelledStatus)
+                val cancelCall = statusRepository.updateStatus(cancelledStatus)
+                cancelCall.enqueue(object: Callback<SeatStatus> {
+                    override fun onResponse(call: Call<SeatStatus>, response: Response<SeatStatus>) {
+                        activity?.onBackPressed()
+                    }
+                    override fun onFailure(call: Call<SeatStatus>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+                })
             }
         }
     }
