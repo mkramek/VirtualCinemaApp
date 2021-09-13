@@ -4,10 +4,7 @@ import com.cinema.virtualcinema.data.model.Reservation
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ReservationService {
     @GET("reservation")
@@ -24,6 +21,9 @@ interface ReservationService {
 
     @POST("reservation")
     fun createReservation(@Body reservation: Reservation): Call<Reservation>
+
+    @DELETE("reservation/{id}")
+    fun deleteReservation(@Path("id") reservationID: Long): Call<String>
 
     companion object {
         var service: ReservationService? = null

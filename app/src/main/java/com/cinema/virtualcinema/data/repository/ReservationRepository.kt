@@ -9,4 +9,5 @@ class ReservationRepository constructor(private val reservationService: Reservat
     fun getReservationsByRoom(roomId: Long) = reservationService.getReservationsByRoom(roomId)
     fun getReservationsBySeat(seatId: Long) = reservationService.getReservationsBySeat(seatId)
     fun createReservation(reservation: Reservation) = reservationService.createReservation(reservation)
+    fun deleteReservation(reservationID: Long) = reservationService.deleteReservation(reservationID)
 }

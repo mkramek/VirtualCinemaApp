@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
@@ -21,6 +22,7 @@ import com.cinema.virtualcinema.data.service.ReservationService
 import com.cinema.virtualcinema.data.service.SeatStatusService
 import com.cinema.virtualcinema.http.APIClient
 import com.cinema.virtualcinema.http.APIInterface
+import com.cinema.virtualcinema.ui.OnDeleteRequestListener
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,12 +31,22 @@ import java.lang.StringBuilder
 
 class ReservationsAdapter : RecyclerView.Adapter<ReservationsAdapter.ReservationsViewHolder>() {
 
+    private lateinit var delReqListener: OnDeleteRequestListener
     private var reservations = mutableListOf<Reservation>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setReservations(seats: List<Reservation>) {
         this.reservations = seats.toMutableList()
         notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun onDeleteRequestDone() {
+        notifyDataSetChanged()
+    }
+
+    fun setOnDeleteRequestListener(listener: OnDeleteRequestListener) {
+        this.delReqListener = listener
     }
 
     override fun getItemCount() = reservations.size
@@ -48,9 +60,18 @@ class ReservationsAdapter : RecyclerView.Adapter<ReservationsAdapter.Reservation
 
     inner class ReservationsViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(item: Reservation) {
+            Log.d("RSRV/LIST", item.toString())
             view.findViewById<TextView>(R.id.reservation_id).text = item.id.toString()
             view.findViewById<TextView>(R.id.reservation_seat).text = item.seat.toString()
             view.findViewById<TextView>(R.id.reservation_room).text = item.seat.room.toString()
+            view.findViewById<Button>(R.id.delete_trigger_btn).setOnClickListener {
+                sendDeleteRequest(item.id)
+            }
+        }
+        @SuppressLint("NotifyDataSetChanged")
+        private fun sendDeleteRequest(itemID: Long) {
+            delReqListener.onDeleteRequest(itemID)
+            notifyDataSetChanged()
         }
     }
 }

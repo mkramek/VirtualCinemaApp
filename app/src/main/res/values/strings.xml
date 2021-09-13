@@ -23,4 +23,5 @@
     <string name="reservation_room">Sala</string>
     <string name="reservation_id">ID rezerwacji</string>
     <string name="profile_reservations_title">Twoje rezerwacje</string>
+    <string name="delete_reservation">Usuń rezerwację</string>
 </resources>

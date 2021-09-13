@@ -27,4 +27,12 @@ class ProfileViewModel constructor(private val repository: ReservationRepository
             }
         })
     }
+
+    fun deleteReservation(itemID: Long) {
+        val list = reservationList.value as ArrayList
+        list.removeAll {
+            it.id == itemID
+        }
+        reservationList.postValue(list)
+    }
 }

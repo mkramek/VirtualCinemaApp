@@ -53,6 +53,7 @@ class ReservationSeatsFragment : Fragment() {
         val prefs = view.context.getSharedPreferences("local_user.preferences", Context.MODE_PRIVATE)
         val uuid = prefs.getString("user@uuid", "")
         viewModel = ViewModelProvider(this, ReservationSeatsViewModelFactory(seatsRepository, statusRepository)).get(ReservationSeatsViewModel::class.java)
+        viewModel.poll()
         val recyclerView: RecyclerView = view.findViewById(R.id.seats_recyclerview)
         recyclerView.apply {
             adapter = seatsAdapter
